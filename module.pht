@@ -1,0 +1,4 @@
+os=debian
+giturl=https://github.com/phthub/flask-server
+exec=main.sh
+vpath=/opt/server
