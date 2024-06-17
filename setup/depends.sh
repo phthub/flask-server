@@ -7,10 +7,11 @@ command_exists() {
 
 # Function to install a package if not already installed
 install_package() {
+    apt update
     local PACKAGE=$1
     if ! dpkg -l | grep -qw "$PACKAGE"; then
         warnlog "$PACKAGE is not installed. Installing $PACKAGE..."
-        apt update && apt install -y "$PACKAGE" &> /dev/null
+        apt install -y "$PACKAGE" &> /dev/null
         if dpkg -l | grep -qw "$PACKAGE"; then
             successlog "$PACKAGE installed successfully."
         else

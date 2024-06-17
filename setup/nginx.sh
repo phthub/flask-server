@@ -21,7 +21,7 @@ prompt() {
     local USER_INPUT
 
     read -p "$PROMPT_TEXT [$DEFAULT_VALUE]: " USER_INPUT
-    infolog "${USER_INPUT:-$DEFAULT_VALUE}"
+    echo "${USER_INPUT:-$DEFAULT_VALUE}"
 }
 
 # Function to setup NGINX reverse proxy
