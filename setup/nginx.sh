@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# Function to check if NGINX is installed
-check_and_install_nginx() {
-    if ! command -v nginx &> /dev/null
-    then
-        infolog "NGINX is not installed. Installing NGINX..."
-        apt update
-        apt install -y nginx
-        if ! command -v nginx &> /dev/null; then
-            errorlog "Failed to install NGINX. Please install it manually and run this script again." && exit 1
-            exit 1
-        fi
-    fi
-}
-
 # Function to prompt user for input with default value
 prompt() {
     local PROMPT_TEXT=$1
@@ -59,5 +45,4 @@ EOL
 }
 
 # Main script
-check_and_install_nginx
 setup_nginx_proxy
