@@ -10,7 +10,7 @@ install_package() {
     local PACKAGE=$1
     if ! dpkg -l | grep -qw "$PACKAGE"; then
         warnlog "$PACKAGE is not installed. Installing $PACKAGE..."
-        apt update && apt install -y "$PACKAGE"
+        apt update && apt install -y "$PACKAGE" 1> /dev/null
         if dpkg -l | grep -qw "$PACKAGE"; then
             successlog "$PACKAGE installed successfully."
         else
