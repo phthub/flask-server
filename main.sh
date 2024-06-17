@@ -34,5 +34,5 @@ if [[ -d ./setup ]]; then
 
     rm -r setup/
 fi
-
+service nginx start
 python3 server.py

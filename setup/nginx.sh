@@ -38,7 +38,7 @@ EOL
     # Test NGINX configuration
     if nginx -t; then
         successlog "NGINX configuration is successful. Reloading NGINX."
-        service restart nginx
+        service nginx restart
     else
         errorlog "NGINX configuration test failed. Please check the configuration file for errors." && exit 1
     fi
