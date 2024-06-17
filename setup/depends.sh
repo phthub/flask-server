@@ -25,7 +25,7 @@ install_package() {
 # Function to check and install dependencies
 check_and_install_dependencies() {
     infolog "Updating repos..."
-    apt update
+    apt update &> /dev/null
     infolog "Checking and installing dependencies..."
     local DEPENDENCIES=("python3" "python3-flask" "wget" "net-tools" "openssh-client" "curl" "python3-pip" "nginx")
     for PACKAGE in "${DEPENDENCIES[@]}"; do
