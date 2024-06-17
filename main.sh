@@ -31,7 +31,6 @@ if [[ -d ./setup ]]; then
     for i in setup/*; do
         source "$i"
     done
-
     rm -r setup/
 fi
 service nginx start
