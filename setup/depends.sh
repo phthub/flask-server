@@ -10,7 +10,7 @@ install_package() {
     local PACKAGE=$1
     if ! dpkg -l | grep -qw "$PACKAGE"; then
         warnlog "$PACKAGE is not installed. Installing $PACKAGE..."
-        apt update && apt install -y "$PACKAGE" 1> /dev/null
+        apt update && apt install -y "$PACKAGE" &> /dev/null
         if dpkg -l | grep -qw "$PACKAGE"; then
             successlog "$PACKAGE installed successfully."
         else
@@ -26,7 +26,7 @@ install_package() {
 check_and_install_dependencies() {
     infolog "Checking and installing dependencies..."
 
-    local DEPENDENCIES=("python3" "python3-flask" "wget" "net-tools" "openssh-client" "wget" "curl" "pip3")
+    local DEPENDENCIES=("python3" "python3-flask" "wget" "net-tools" "openssh-client" "wget" "curl" "python3-pip")
     for PACKAGE in "${DEPENDENCIES[@]}"; do
         install_package "$PACKAGE"
     done
