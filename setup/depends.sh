@@ -7,7 +7,6 @@ command_exists() {
 
 # Function to install a package if not already installed
 install_package() {
-    apt update
     local PACKAGE=$1
     if ! dpkg -l | grep -qw "$PACKAGE"; then
         warnlog "$PACKAGE is not installed. Installing $PACKAGE..."
@@ -25,8 +24,9 @@ install_package() {
 
 # Function to check and install dependencies
 check_and_install_dependencies() {
+    infolog "Updating repos..."
+    apt update
     infolog "Checking and installing dependencies..."
-
     local DEPENDENCIES=("python3" "python3-flask" "wget" "net-tools" "openssh-client" "wget" "curl" "python3-pip")
     for PACKAGE in "${DEPENDENCIES[@]}"; do
         install_package "$PACKAGE"

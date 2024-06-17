@@ -52,7 +52,7 @@ EOL
     # Test NGINX configuration
     if nginx -t; then
         successlog "NGINX configuration is successful. Reloading NGINX."
-        systemctl reload nginx
+        service restart nginx
     else
         errorlog "NGINX configuration test failed. Please check the configuration file for errors." && exit 1
     fi
