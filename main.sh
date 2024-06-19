@@ -26,6 +26,8 @@ sublog() {
     echo -e "\t${RESET}${MAGENTA}ㄷ ${WHITE}$1" && sleep 0.2
 }
 
+source config.conf
+
 # Setup
 if [[ -d ./setup ]]; then
     for i in setup/*; do
