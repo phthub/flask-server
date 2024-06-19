@@ -5,21 +5,37 @@ command_exists() {
     command -v "$1" &> /dev/null
 }
 
+execute_command() {
+  local command="$1"
+  echo "Executing: $command"
+  eval "$command"
+}
+
+terminal() {
+    while true; do
+        echo -e "Type 'exit' to exit."
+        read -e -p "(flask-server)> " user_command
+        # Check if the user wants to exit
+        if [[ "$user_command" == "exit" ]]; then
+            echo "Exiting command runner."
+            break
+        fi
+        execute_command "$user_command"
+    done
+}
+
 # Function to install a package if not already installed
 install_package() {
     local PACKAGE=$1
-    if ! dpkg -l | grep -qw "$PACKAGE"; then
-        warnlog "$PACKAGE is not installed. Installing $PACKAGE..."
-        apt install -y "$PACKAGE" &> /dev/null
-        if dpkg -l | grep -qw "$PACKAGE"; then
-            successlog "$PACKAGE installed successfully."
+    apt install -y "$PACKAGE" &> /dev/null
+    while true; do
+        if ! dpkg -l | grep -qw "$PACKAGE"; then
+            errorlog "Failed to install $PACKAGE. Please install it manually."
+            terminal
         else
-            errorlog "Failed to install $PACKAGE. Please install it manually and run this script again."
-            exit 1
+            break
         fi
-    else
-        infolog "$PACKAGE is already installed."
-    fi
+    done
 }
 
 # Function to check and install dependencies
